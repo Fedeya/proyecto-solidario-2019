@@ -5,17 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   M.Sidenav.init(sidenavItem, {});
 });
 
-document.querySelector("#bici-p").addEventListener("click", () => {
-
-  const p = [
-    "Ariel Aggio", "Agustin Almada",
-    "Avril Buffa", "Luciano Coronel", 
-    "Luciana Fernandez", "Matilda Garijo",
-    "Candela Gomez", "Ivan Ibarra",
-    "Luna Kies", "Nahuel Martinez",
-    "Federico Minaya", "Valentina Volpe",
-  ]
-
+function showParticipants(p){
   let participantes = "";
 
   p.forEach(participante => {
@@ -28,97 +18,74 @@ document.querySelector("#bici-p").addEventListener("click", () => {
       ${participantes}
     </ul>
   `
-  console.log(wrapper.innerHTML);
-
   swal({
     content: wrapper
   })
-})
+}
 
-document.querySelector("#bici-ps").addEventListener("click", () => {
+function showImages(cantidad, proyecto){
 
-  const p = [
-    "Ariel Aggio", "Agustin Almada",
-    "Avril Buffa", "Luciano Coronel", 
-    "Luciana Fernandez", "Matilda Garijo",
-    "Candela Gomez", "Ivan Ibarra",
-    "Luna Kies", "Nahuel Martinez",
-    "Federico Minaya", "Valentina Volpe",
-  ]
+  let imagenes = "";
 
-  let participantes = "";
-
-  p.forEach(participante => {
-    participantes += `<li class="collection-item">${participante}</li>`
-  })
+  for(let i = 1; i <= cantidad; i++){
+    imagenes += `
+      <img src="${proyecto}/images/image-${i}.jpeg" id="image-${i}-${proyecto}" alt="Imagen de ${proyecto} numero ${i}" class="image responsive-img"/>
+    `
+  }
 
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
-    <ul class="collection">
-      ${participantes}
-    </ul>
-  `
-  console.log(wrapper.innerHTML);
+    <div className="gallery">
+      ${imagenes}
+    </div>
+  `;
 
   swal({
     content: wrapper
   })
-})
 
-document.querySelector("#banco-p").addEventListener("click", () => {
+  for(let i = 1; i <= cantidad; i++){
+    document.querySelector(`#image-${i}-${proyecto}`).addEventListener("click", e => {
 
-  const p = [
-    "Camila Esquivel", "Valentina Lloret",
-    "Martina Lopez", "Patricio Miranda",
-    "Valentina Navarro", "Pilar Octtinger",
-    "Selene Sierra", "Agustin Vega",
-    "Santino Volpe" 
-  ]
+      const image = e.srcElement.attributes.src.value;
 
-  let participantes = "";
+      const content = document.createElement("img");
+      content.src = image;
+      content.alt = `image-${i}-${proyecto}`;
+      content.classList = ["responsive-img"];
 
-  p.forEach(participante => {
-    participantes += `<li class="collection-item">${participante}</li>`
-  })
 
-  const wrapper = document.createElement("div");
-  wrapper.innerHTML = `
-    <ul class="collection">
-      ${participantes}
-    </ul>
-  `
-  console.log(wrapper.innerHTML);
+      swal({ content, button: "Atras" }).then(() => swal({ content: wrapper }));
 
-  swal({
-    content: wrapper
-  })
-})
+    });
+  }
 
-document.querySelector("#banco-ps").addEventListener("click", () => {
+}
 
-  const p = [
-    "Camila Esquivel", "Valentina Lloret",
-    "Martina Lopez", "Patricio Miranda",
-    "Valentina Navarro", "Pilar Octtinger",
-    "Selene Sierra", "Agustin Vega",
-    "Santino Volpe" 
-  ]
+const pBicis = [
+  "Ariel Aggio", "Agustin Almada",
+  "Avril Buffa", "Luciano Coronel", 
+  "Luciana Fernandez", "Matilda Garijo",
+  "Candela Gomez", "Ivan Ibarra",
+  "Luna Kies", "Nahuel Martinez",
+  "Federico Minaya", "Valentina Volpe",
+]
 
-  let participantes = "";
+const pBanco = [
+  "Camila Esquivel", "Valentina Lloret",
+  "Martina Lopez", "Patricio Miranda",
+  "Valentina Navarro", "Pilar Octtinger",
+  "Selene Sierra", "Agustin Vega",
+  "Santino Volpe" 
+]
 
-  p.forEach(participante => {
-    participantes += `<li class="collection-item">${participante}</li>`
-  })
+document.querySelector("#bici-p").addEventListener("click", () => showParticipants(pBicis));
 
-  const wrapper = document.createElement("div");
-  wrapper.innerHTML = `
-    <ul class="collection">
-      ${participantes}
-    </ul>
-  `
-  console.log(wrapper.innerHTML);
+document.querySelector("#bici-ps").addEventListener("click", () => showParticipants(pBicis));
 
-  swal({
-    content: wrapper
-  })
-})
+document.querySelector("#bici-g").addEventListener("click", () => showImages(18, "bicis"))
+document.querySelector("#bici-gs").addEventListener("click", () => showImages(18, "bicis"))
+
+document.querySelector("#banco-p").addEventListener("click", () => showParticipants(pBanco))
+
+document.querySelector("#banco-ps").addEventListener("click", () => showParticipants(pBanco))
