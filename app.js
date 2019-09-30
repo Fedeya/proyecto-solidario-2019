@@ -35,7 +35,7 @@ function showImages(cantidad, proyecto){
 
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
-    <div className="gallery">
+    <div class="gallery">
       ${imagenes}
     </div>
   `;
@@ -52,8 +52,7 @@ function showImages(cantidad, proyecto){
       const content = document.createElement("img");
       content.src = image;
       content.alt = `image-${i}-${proyecto}`;
-      content.classList = ["responsive-img"];
-
+      content.classList = ["responsive-img"];    
 
       swal({ content, button: "Atras" }).then(() => swal({ content: wrapper }));
 
