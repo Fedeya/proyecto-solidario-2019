@@ -80,11 +80,19 @@ const pBanco = [
 
 document.querySelector("#bici-p").addEventListener("click", () => showParticipants(pBicis));
 
-document.querySelector("#bici-ps").addEventListener("click", () => showParticipants(pBicis));
-
 document.querySelector("#bici-g").addEventListener("click", () => showImages(18, "bicis"))
-document.querySelector("#bici-gs").addEventListener("click", () => showImages(18, "bicis"))
 
 document.querySelector("#banco-p").addEventListener("click", () => showParticipants(pBanco))
 
-document.querySelector("#banco-ps").addEventListener("click", () => showParticipants(pBanco))
+
+const background = document.querySelector(".background-img");
+const images = ["1.jpeg", "2.jpeg", "3.jpeg"]
+let image = 0;
+
+setInterval(() => {
+  if(image > 2){
+    image = 0;
+  }
+  background.src = `./images/${images[image]}`
+  image++;
+}, 5000)
